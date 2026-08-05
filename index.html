@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>ClaimShield Enterprise - B2B Multimodal Claim Platform</title>
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Stylesheet with Cache Buster -->
+  <link rel="stylesheet" href="./src/css/styles.css?v=13.0">
+  
+  <!-- Immediate Inline Style Override for Cache-Free B2B Cream White Theme -->
+  <style>
+    body {
+      background-color: #fbfbfa !important;
+      color: #111827 !important;
+    }
+    .official-reply-card .reply-text, .official-reply-card p {
+      color: #000000 !important;
+      font-weight: 600 !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ultra-Clean Top Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <div class="nav-logo">
+        <i class="fa-solid fa-shield-halved"></i>
+      </div>
+      <div>
+        <div class="brand-name">CLAIMSHIELD</div>
+        <div style="font-size: 0.75rem; color: var(--text-muted);">Enterprise Insurance Network</div>
+      </div>
+    </div>
+
+    <!-- Active Navigation Tabs (Hidden when logged out) -->
+    <div id="nav-tabs-container" class="nav-tabs" style="display: none;">
+      <button id="nav-tab-claimant" class="nav-tab-btn active">
+        <i class="fa-solid fa-user"></i> My Claims Portal
+      </button>
+      <button id="nav-tab-official" class="nav-tab-btn" style="display: none;">
+        <i class="fa-solid fa-building-shield"></i> Official Claims Dashboard
+      </button>
+    </div>
+
+    <!-- Active User Profile Pill & Log Out Button (Hidden when logged out) -->
+    <div id="user-profile-pill" class="user-profile-pill" style="display: none;">
+      <div class="user-avatar"><i class="fa-solid fa-user-check"></i></div>
+      <div>
+        <div id="user-name-display" style="font-weight: 700; color: var(--text-primary); line-height: 1.2;"></div>
+        <span id="user-role-badge" class="badge badge-success">Policyholder</span>
+      </div>
+      <button id="btn-logout" class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.75rem; margin-left: 8px;">
+        <i class="fa-solid fa-right-from-bracket"></i> Log Out
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Application Container -->
+  <div class="content-wrapper">
+
+    <!-- VIEW 0: SINGLE OPTION-BASED LOGIN SCREEN -->
+    <section id="view-login" class="view-section active">
+      <div class="login-single-container">
+        
+        <div style="text-align: center; margin-bottom: 2.5rem;">
+          <h1 style="font-size: 2.25rem; font-weight: 800; color: var(--text-primary); letter-spacing: -0.5px;">Transform Enterprise Claims with Multimodal AI</h1>
+          <p style="font-size: 1rem; color: var(--text-secondary); margin-top: 6px;">Select your sign-in portal to access your account</p>
+        </div>
+
+        <div class="login-single-card">
+          
+          <!-- ROLE SELECTOR TABS -->
+          <div class="role-select-bar">
+            <button id="role-tab-policyholder" class="role-option-btn active">
+              <i class="fa-solid fa-user-shield"></i> Policyholder Sign-In
+            </button>
+            <button id="role-tab-insurer" class="role-option-btn">
+              <i class="fa-solid fa-building-shield"></i> Insurance Official
+            </button>
+            <button id="role-tab-register" class="role-option-btn">
+              <i class="fa-solid fa-user-plus"></i> Create Account
+            </button>
+          </div>
+
+          <!-- PANEL 1: POLICYHOLDER / CUSTOMER LOGIN -->
+          <div id="login-panel-policyholder" class="login-panel active">
+            <div class="form-field" style="margin-bottom: 1rem;">
+              <label class="form-label" for="input-user-policy">Email Address</label>
+              <input type="email" id="input-user-policy" class="form-control" value="" placeholder="example@gmail.com">
+            </div>
+
+            <div class="form-field" style="margin-bottom: 1.5rem;">
+              <label class="form-label">Password</label>
+              <input type="password" class="form-control" placeholder="••••••••••••">
+            </div>
+
+            <button id="btn-login-user" class="btn btn-primary" style="width: 100%; padding: 13px; margin-bottom: 1rem;">
+              <i class="fa-solid fa-right-to-bracket"></i> Sign In to Customer Portal
+            </button>
+
+            <p style="text-align: center; margin-bottom: 0.5rem; font-size: 0.85rem; color: var(--text-secondary);">
+              Don't have an account? <a href="#" id="link-goto-register-user" style="color: var(--primary); font-weight: 700; text-decoration: none;">Create New Account</a>
+            </p>
+          </div>
+
+          <!-- PANEL 2: INSURANCE COMPANY OFFICIAL LOGIN -->
+          <div id="login-panel-insurer" class="login-panel">
+            <div class="form-field" style="margin-bottom: 1rem;">
+              <label class="form-label" for="input-official-code">Insurance Company Code</label>
+              <input type="text" id="input-official-code" class="form-control" value="" placeholder="Enter Insurance Company Code">
+            </div>
+
+            <div class="form-field" style="margin-bottom: 1rem;">
+              <label class="form-label" for="input-official-name">Official Staff Name</label>
+              <input type="text" id="input-official-name" class="form-control" placeholder="Enter Official Staff Name">
+            </div>
+
+            <div class="form-field" style="margin-bottom: 1.5rem;">
+              <label class="form-label">Official Credentials Key</label>
+              <input type="password" class="form-control" placeholder="••••••••••••">
+            </div>
+
+            <button id="btn-login-official" class="btn btn-primary" style="width: 100%; padding: 13px; margin-bottom: 1rem;">
+              <i class="fa-solid fa-lock"></i> Authenticate Insurer Credentials
+            </button>
+
+            <p style="text-align: center; margin-bottom: 0.5rem; font-size: 0.85rem; color: var(--text-secondary);">
+              Need official credentials? <a href="#" id="link-goto-register-official" style="color: var(--primary); font-weight: 700; text-decoration: none;">Register New Account</a>
+            </p>
+          </div>
+
+          <!-- PANEL 3: CREATE NEW ACCOUNT (REGISTRATION) -->
+          <div id="login-panel-register" class="login-panel">
+            <div style="margin-bottom: 1.25rem;">
+              <label class="form-label" style="margin-bottom: 6px; display: block;">Account Role Type:</label>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <button type="button" id="reg-type-btn-policyholder" class="btn btn-secondary active" style="font-size: 0.85rem; padding: 10px;">
+                  <i class="fa-solid fa-user-shield"></i> Policyholder
+                </button>
+                <button type="button" id="reg-type-btn-official" class="btn btn-secondary" style="font-size: 0.85rem; padding: 10px;">
+                  <i class="fa-solid fa-building-shield"></i> Insurance Official
+                </button>
+              </div>
+            </div>
+
+            <!-- POLICYHOLDER REGISTRATION FIELDS -->
+            <div id="reg-fields-policyholder">
+              <div class="form-field" style="margin-bottom: 0.85rem;">
+                <label class="form-label" for="reg-user-name">Full Name</label>
+                <input type="text" id="reg-user-name" class="form-control" placeholder="Enter Full Name" value="">
+              </div>
+
+              <div class="form-field" style="margin-bottom: 0.85rem;">
+                <label class="form-label" for="reg-user-email">Email Address</label>
+                <input type="email" id="reg-user-email" class="form-control" placeholder="example@gmail.com" value="">
+              </div>
+
+              <div class="form-field" style="margin-bottom: 1.25rem;">
+                <label class="form-label" for="reg-user-password">Create Password</label>
+                <input type="password" id="reg-user-password" class="form-control" placeholder="••••••••••••" value="">
+              </div>
+            </div>
+
+            <!-- INSURANCE OFFICIAL REGISTRATION FIELDS -->
+            <div id="reg-fields-official" style="display: none;">
+              <div class="form-field" style="margin-bottom: 0.85rem;">
+                <label class="form-label" for="reg-official-name">Official Staff Name</label>
+                <input type="text" id="reg-official-name" class="form-control" placeholder="Enter Official Staff Name" value="">
+              </div>
+
+              <div class="form-field" style="margin-bottom: 0.85rem;">
+                <label class="form-label" for="reg-official-code">Insurance Company Code</label>
+                <input type="text" id="reg-official-code" class="form-control" placeholder="Enter Insurance Company Code" value="">
+              </div>
+
+              <div class="form-field" style="margin-bottom: 0.85rem;">
+                <label class="form-label" for="reg-official-email">Work Email</label>
+                <input type="email" id="reg-official-email" class="form-control" placeholder="contact@example.com" value="">
+              </div>
+
+              <div class="form-field" style="margin-bottom: 1.25rem;">
+                <label class="form-label" for="reg-official-password">Credentials Key / Password</label>
+                <input type="password" id="reg-official-password" class="form-control" placeholder="••••••••••••" value="">
+              </div>
+            </div>
+
+            <button id="btn-create-account" class="btn btn-primary" style="width: 100%; padding: 13px; margin-bottom: 1rem;">
+              <i class="fa-solid fa-user-plus"></i> Create Account & Launch Portal
+            </button>
+          </div>
+
+        </div>
+
+        <!-- THREE FEATURE CARDS AT BOTTOM WITH SOFT DIFFUSED SHADOWS & 8PX ROUNDED CORNERS -->
+        <div class="feature-cards-grid">
+          
+          <div class="feature-card">
+            <div class="feature-icon-box">
+              <i class="fa-solid fa-brain"></i>
+            </div>
+            <h4 style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary); margin-bottom: 6px;">Multimodal Alignment</h4>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">
+              Fuses computer vision damage localization with NLP claim narratives to flag cross-modal contradictions.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
+            <h4 style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary); margin-bottom: 6px;">Automated Risk Queues</h4>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">
+              Categorizes incoming claims automatically into Fraud (>60%), Auto-Approve (<20%), and Review queues.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box">
+              <i class="fa-solid fa-book-bookmark"></i>
+            </div>
+            <h4 style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary); margin-bottom: 6px;">RAG Policy Matching</h4>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">
+              Performs dense vector similarity matching across policy contracts to check coverage and deductibles.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- VIEW 1: CLAIMANT / USER PORTAL (Clean Status Timeline, No AI Models Shown) -->
+    <section id="view-claimant" class="view-section">
+      <div class="section-header">
+        <h2 class="section-title">Customer Claims Portal</h2>
+        <p class="section-desc">File accident reports directly to your insurance company and track official status updates.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+        
+        <!-- Submit Claim Card -->
+        <div class="card-panel">
+          <h3 style="font-size: 1.2rem; color: var(--text-primary); margin-bottom: 1.25rem;"><i class="fa-solid fa-file-circle-plus" style="color: var(--primary);"></i> Submit New Claim</h3>
+
+          <div class="form-field" style="margin-bottom: 1rem;">
+            <label class="form-label" for="sub-company-code">Insurance Company</label>
+            <input type="text" id="sub-company-code" class="form-control" list="companies-datalist" placeholder="Search Insurance Company..." value="">
+            <datalist id="companies-datalist"></datalist>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-field">
+              <label class="form-label" for="sub-policy-no">Your Policy Number</label>
+              <input type="text" id="sub-policy-no" class="form-control" value="" placeholder="Enter Policy Number">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="sub-name">Policyholder Full Name</label>
+              <input type="text" id="sub-name" class="form-control" value="" placeholder="Enter Full Name">
+            </div>
+          </div>
+
+          <div class="form-field" style="margin-bottom: 1.25rem;">
+            <label class="form-label" for="sub-description">Accident Narrative Statement</label>
+            <textarea id="sub-description" class="form-control" placeholder="Describe the incident details, direction of impact, and damaged areas..."></textarea>
+          </div>
+
+          <div class="form-field" style="margin-bottom: 1.5rem;">
+            <label class="form-label">Attach Accident Photographs</label>
+            <div id="dropzone-claim-photo" class="dropzone-box" style="position: relative; cursor: pointer;">
+              <input type="file" id="sub-photo-input" accept="image/*" style="display: none;">
+              
+              <div id="dropzone-prompt">
+                <i class="fa-solid fa-cloud-arrow-up dropzone-icon" style="font-size: 2.2rem; color: var(--primary); margin-bottom: 8px;"></i>
+                <h4 style="color: var(--text-primary); margin-bottom: 4px; font-size: 0.95rem;">Click or Drag & Drop Vehicle Photo</h4>
+                <p style="font-size: 0.8rem; color: var(--text-muted);">Supports PNG, JPG, WEBP formats</p>
+              </div>
+
+              <div id="dropzone-preview" style="display: none; align-items: center; justify-content: center; flex-direction: column; gap: 8px;">
+                <img id="img-upload-preview" src="" alt="Vehicle Photo Preview" style="max-height: 160px; max-width: 100%; border-radius: 6px; border: 1px solid var(--border-subtle); object-fit: contain; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+                <div style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">
+                  <span id="upload-filename-badge" class="badge badge-success" style="font-size: 0.8rem; padding: 4px 10px;">photo.jpg</span>
+                  <button type="button" id="btn-remove-photo" class="btn btn-secondary" style="padding: 3px 10px; font-size: 0.78rem; color: var(--danger);">
+                    <i class="fa-solid fa-trash"></i> Remove Photo
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button id="btn-submit-claim" class="btn btn-primary" style="width: 100%; padding: 14px;">
+            <i class="fa-solid fa-paper-plane"></i> Submit Claim to Insurer
+          </button>
+        </div>
+
+        <!-- Submitted Claims & Official Company Replies -->
+        <div>
+          <h3 style="font-size: 1.2rem; color: var(--text-primary); margin-bottom: 1.25rem;"><i class="fa-solid fa-list-check" style="color: var(--primary);"></i> My Claim Tracking & Replies</h3>
+          
+          <div id="user-claims-list">
+            <!-- Dynamic User Claims -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- VIEW 2: INSURANCE COMPANY OFFICIAL DASHBOARD -->
+    <section id="view-official" class="view-section">
+      <div class="section-header" style="display: flex; justify-content: space-between; align-items: flex-end;">
+        <div>
+          <h2 class="section-title">Official Insurer Workspace</h2>
+          <p class="section-desc">Managing incoming claims for <strong id="official-company-name" style="color: var(--primary);">Insurance Workspace</strong> using automated AI fraud categorization.</p>
+        </div>
+
+        <div style="display: flex; gap: 8px;">
+          <button class="btn btn-primary btn-filter" data-filter="all">All Company Claims</button>
+          <button class="btn btn-secondary btn-filter" data-filter="fraud"><i class="fa-solid fa-triangle-exclamation" style="color: var(--danger);"></i> Fraud Queue (>60%)</button>
+          <button class="btn btn-secondary btn-filter" data-filter="review"><i class="fa-solid fa-clock" style="color: var(--warning);"></i> Pending Review (20-60%)</button>
+          <button class="btn btn-secondary btn-filter" data-filter="approved"><i class="fa-solid fa-circle-check" style="color: var(--success);"></i> Fast-Track Auto-Approved</button>
+        </div>
+      </div>
+
+      <!-- Claims Grid -->
+      <div id="official-claims-grid" class="claims-grid">
+        <!-- Dynamic Company Claims -->
+      </div>
+    </section>
+
+    <!-- VIEW 3: COMPANY OFFICIAL AI CLAIM INSPECTOR -->
+    <section id="view-inspector" class="view-section">
+      
+      <!-- Top Inspector Header -->
+      <div class="card-panel" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <button id="btn-back-to-dashboard" class="btn btn-secondary" style="padding: 8px 14px; font-size: 0.85rem;">
+            <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+          </button>
+          <div>
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 2px;">
+              <h2 id="insp-ref" class="section-title" style="margin: 0; font-family: var(--font-mono); color: var(--primary); font-size: 1.3rem;"></h2>
+              <span id="insp-status-badge" class="badge badge-danger">Pending Review</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">
+              Claimant: <strong id="insp-name" style="color: var(--text-primary);"></strong> • Policy: <span id="insp-policy"></span> • Date: <span id="insp-date"></span>
+            </p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 10px;">
+          <button id="btn-approve-claim" class="btn btn-success"><i class="fa-solid fa-check"></i> Authorize Payout</button>
+          <button id="btn-reject-claim" class="btn btn-danger"><i class="fa-solid fa-shield-xmark"></i> Flag SIU Audit</button>
+          <button id="btn-export-report" class="btn btn-secondary"><i class="fa-solid fa-print"></i> Export Report</button>
+        </div>
+      </div>
+
+      <!-- Subtabs -->
+      <div class="inspector-subtabs">
+        <button class="subtab-btn active" data-subtab="overview"><i class="fa-solid fa-chart-pie"></i> Fraud Risk Overview</button>
+        <button class="subtab-btn" data-subtab="cv-nlp"><i class="fa-solid fa-eye"></i> Vision AI & Narrative NLP Analysis</button>
+        <button class="subtab-btn" data-subtab="policy"><i class="fa-solid fa-book-bookmark"></i> RAG Policy Matcher</button>
+        <button class="subtab-btn" data-subtab="cost"><i class="fa-solid fa-calculator"></i> Repair Cost Breakdown</button>
+      </div>
+
+      <!-- Subtab 1: Overview & Reply Dispatcher -->
+      <div id="subtab-overview" class="subtab-content active">
+        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1.5rem;">
+          
+          <div class="card-panel" style="text-align: center;">
+            <div style="font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase;">Automated Fraud Risk Index</div>
+            <div id="insp-score" style="font-size: 4rem; font-weight: 800; font-family: var(--font-mono); color: var(--danger); line-height: 1.1; margin: 1rem 0;">94%</div>
+            <div id="insp-level" class="badge badge-danger" style="font-size: 0.85rem; padding: 6px 14px;">CRITICAL FRAUD RISK</div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+            
+            <div class="card-panel">
+              <h3 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 1rem;"><i class="fa-solid fa-flag" style="color: var(--danger);"></i> Multimodal Red Flags</h3>
+              <div id="insp-flags"></div>
+            </div>
+
+            <!-- DISPATCH OFFICIAL REPLY TO CLAIMANT PORTAL -->
+            <div class="card-panel" style="border-color: rgba(13, 92, 99, 0.3);">
+              <h3 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.75rem;"><i class="fa-solid fa-reply" style="color: var(--primary);"></i> Dispatch Official Reply to Claimant</h3>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                This response will be published directly to the customer's portal view without exposing AI model internals.
+              </p>
+              
+              <textarea id="insp-reply-input" class="form-control" style="min-height: 90px; margin-bottom: 1rem;" placeholder="Type official notification to policyholder..."></textarea>
+              <button id="btn-send-reply" class="btn btn-primary">
+                <i class="fa-solid fa-paper-plane"></i> Send Official Reply to Claimant
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Subtab 2: MERGED VISION AI & NARRATIVE NLP ANALYSIS (UNIFIED SINGLE PAGE) -->
+      <div id="subtab-cv-nlp" class="subtab-content">
+        <div class="cv-nlp-grid" style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 1.5rem;">
+          
+          <!-- LEFT COLUMN: VISION AI DAMAGE CANVAS -->
+          <div class="card-panel" style="display: flex; flex-direction: column;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <h3 style="font-size: 1.1rem; color: var(--text-primary); margin: 0;">
+                <i class="fa-solid fa-camera" style="color: var(--primary);"></i> Vision AI Damage Segmentation
+              </h3>
+              <label style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-secondary); cursor: pointer;">
+                <input type="checkbox" id="toggle-bboxes" checked> Show AI Bounding Boxes
+              </label>
+            </div>
+
+            <div class="canvas-wrapper" style="min-height: 320px; flex-grow: 1;">
+              <canvas id="insp-canvas" style="width: 100%; height: 100%; object-fit: contain; display: block;"></canvas>
+            </div>
+
+            <h4 style="margin-top: 1.25rem; margin-bottom: 0.75rem; color: var(--text-primary); font-size: 0.95rem;">
+              <i class="fa-solid fa-crosshairs" style="color: var(--primary);"></i> Localized Damaged Components
+            </h4>
+            <div id="insp-detections"></div>
+          </div>
+
+          <!-- RIGHT COLUMN: TEXT & NARRATIVE NLP PARSER -->
+          <div class="card-panel" style="display: flex; flex-direction: column;">
+            <h3 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 1rem;">
+              <i class="fa-solid fa-quote-left" style="color: var(--primary);"></i> Text & Narrative NLP Statement
+            </h3>
+            
+            <div style="margin-bottom: 1.5rem;">
+              <label style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">Claimant Written Narrative</label>
+              <p id="insp-nlp-text" style="font-size: 0.98rem; color: #000000 !important; background: #ffffff; padding: 1.25rem; border-radius: 8px; border: 1px solid #cbd5e1; border-left: 4px solid var(--primary); font-style: italic; line-height: 1.6; margin-top: 6px;"></p>
+            </div>
+
+            <div style="flex-grow: 1;">
+              <label style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; display: block; margin-bottom: 10px;">
+                Extracted Entity Tokens & Damage Descriptors
+              </label>
+              <div id="insp-nlp-tokens" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
+            </div>
+
+            <div style="margin-top: 1.5rem; background: var(--bg-surface); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-subtle);">
+              <div style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 700; color: var(--text-primary);">
+                <i class="fa-solid fa-brain" style="color: var(--primary);"></i> Cross-Modal Alignment Status
+              </div>
+              <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px; line-height: 1.4;">
+                Visual damage localizations are cross-referenced with narrative entity tokens to detect spatial or structural contradictions automatically.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Subtab 4: Policy RAG -->
+      <div id="subtab-policy" class="subtab-content">
+        <div class="card-panel">
+          <h3 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 1rem;"><i class="fa-solid fa-shield"></i> RAG Vector Policy Matcher</h3>
+          <div id="insp-rag-box" style="background: var(--bg-surface); padding: 1.25rem; border-radius: 8px; border: 1px solid var(--border-subtle);"></div>
+        </div>
+      </div>
+
+      <!-- Subtab 5: Repair Cost -->
+      <div id="subtab-cost" class="subtab-content">
+        <div class="card-panel">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+            <h3 style="font-size: 1.1rem; color: var(--text-primary);"><i class="fa-solid fa-calculator"></i> Itemized Repair Estimate</h3>
+            <select id="insp-parts-toggle" class="form-control" style="width: auto; padding: 6px 12px; font-size: 0.85rem;">
+              <option value="OEM">OEM Parts (Original)</option>
+              <option value="Aftermarket">Aftermarket Parts (-22%)</option>
+            </select>
+          </div>
+
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Item / Component</th>
+                <th>Category</th>
+                <th>Approved Price ($)</th>
+              </tr>
+            </thead>
+            <tbody id="insp-cost-body"></tbody>
+          </table>
+
+          <div style="display: flex; justify-content: flex-end; gap: 3rem; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
+            <div>
+              <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Gross Subtotal</span>
+              <div id="insp-subtotal" style="font-size: 1.2rem; font-weight: 700; color: var(--text-primary);">$3,100</div>
+            </div>
+            <div>
+              <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Net Approved Payout</span>
+              <div id="insp-payout" style="font-size: 1.4rem; font-weight: 800; color: var(--primary);">$2,600</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <!-- Adjuster Report Modal -->
+  <div id="report-modal" class="modal-backdrop">
+    <div class="modal-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 1rem; margin-bottom: 1.5rem;">
+        <h3 style="color: var(--text-primary); font-size: 1.2rem;">Official Company Assessment Summary</h3>
+        <button id="btn-close-modal" style="background: none; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer;">&times;</button>
+      </div>
+
+      <div id="report-content"></div>
+
+      <div style="margin-top: 2rem; text-align: right;">
+        <button class="btn btn-secondary" onclick="window.print()"><i class="fa-solid fa-print"></i> Print Report</button>
+      </div>
+    </div>
+  </div>
+
+  <button id="btn-reset-demo" style="position: fixed; bottom: 20px; right: 20px; background-color: var(--danger, #ff4c4c); color: white; border: none; padding: 10px 15px; border-radius: 8px; font-weight: 600; cursor: pointer; z-index: 9999; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+    <i class="fa-solid fa-trash"></i> Reset All Data
+  </button>
+
+  <script type="module" src="./src/js/app.js?v=16.0"></script>
+</body>
+</html>
