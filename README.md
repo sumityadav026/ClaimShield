@@ -157,3 +157,4 @@ my-new-app/
 <!-- doc update 4 -->
 <!-- doc update 5 -->
 <!-- doc update 6 -->
+<!-- doc update 7 -->
