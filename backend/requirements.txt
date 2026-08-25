@@ -1,0 +1,10 @@
+fastapi>=0.110.0
+uvicorn>=0.28.0
+torch>=2.2.0
+ultralytics>=8.1.0
+opencv-python-headless>=4.9.0
+spacy>=3.7.0
+transformers>=4.38.0
+langchain>=0.1.0
+pydantic>=2.6.0
+python-multipart>=0.0.9
